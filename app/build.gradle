@@ -33,3 +33,8 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+//The bellow is necessary for cli
+run {
+    standardInput = System.in
+}
