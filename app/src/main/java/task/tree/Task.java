@@ -2,10 +2,10 @@ package task.tree;
 
 public class Task {
 	private String name;
-	private Task parentTask;
 	private int fiveMinuteChunks;
 	private boolean done;
 	private int numberOfChildren;
+	private ChildTask[] children;
 	
 	
 	
@@ -34,18 +34,6 @@ public class Task {
 
 
 
-	public Task getParentTask() {
-		return parentTask;
-	}
-
-
-
-	public void setParentTask(Task parentTask) {
-		this.parentTask = parentTask;
-	}
-
-
-
 	public int getFiveMinuteChunks() {
 		return fiveMinuteChunks;
 	}
@@ -68,35 +56,71 @@ public class Task {
 		this.done = done;
 	}
 	
-	public String summary()
-	{
-		return "this task is named " + this.getName() + " and it is a child of the task named " + this.getParentTask().getName();
+	
+	
+	public Task[] getChildren() {
+		return children;
 	}
 
 
 
-	Task(String name, Task parentTask, int fiveMinuteChunks, boolean done)
+	public void setChildren(ChildTask[] children) {
+		this.children = children;
+	}
+	
+	public void updateNumberOfChildren()
+	{
+		this.numberOfChildren = this.children.length;
+	}
+	
+	public String nameWithChildren()
+	{
+		if(this.numberOfChildren == 0)
+		{
+			return this.summary() + " and I have no children";
+		}
+		else
+		{
+			return this.summary() + " and my children are:";
+			
+		}
+	}
+
+	
+	public String summary()
+	{
+		return "this task is named " + this.name;
+	}
+
+
+
+	Task(String name, int fiveMinuteChunks, boolean done)
 	{
 		this.name = name;
-		this.parentTask = parentTask;
 		this.fiveMinuteChunks = fiveMinuteChunks;
 		this.done = done;
 	}
 	
-	Task(String name, Task parentTask, int fiveMinuteChunks)
+	Task(String name, int fiveMinuteChunks)
 	{
-		this(name, parentTask, fiveMinuteChunks, false);
+		this.name = name;
+		this.fiveMinuteChunks = fiveMinuteChunks;
 	}
-	
-	Task(Task parentTask)
-	{
-		this("unnamed", parentTask, 0, false);
-	}
-	
+
+
+
 	Task(String name)
 	{
 		//This should only be used to make a root task
 		this.name = name;
 	}
+	
+	Task()
+	{
+		this.name = "unnamed";
+		this.fiveMinuteChunks = 6;
+		this.done = false;
+	}
+	
 
 }
